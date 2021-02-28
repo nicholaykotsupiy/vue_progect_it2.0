@@ -1,26 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <CallBackForm 
+      @output="sendCallback"
+    />
+
+    <OutputCallBack 
+      :title="callbackValue"
+    >
+    Out:
+    </OutputCallBack>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CallBackForm from './components/CallBackForm'
+import OutputCallBack from './components/OutputCallBack'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    CallBackForm,
+    OutputCallBack
+  },
+  data() {
+    return {
+      callbackValue: '',
+    }
+  },
+  methods: {
+    sendCallback (data) {
+      if(data.callbackValue) {
+        this.callbackValue = data.callbackValue
+      }
+    }
+  },
+  provide: {
+    sign: 'Vue Provide/Reject'
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
